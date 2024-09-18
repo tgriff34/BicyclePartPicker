@@ -7,12 +7,20 @@
 
 <h1>Index</h1>
 
-<div class="col-3">
-    @Html.DropDownListFor(Model => Model.SelectedMakeId, Model.BicycleMakes, "--- Select Make ---", new { @class = "form-control" })
-    @Html.DropDownListFor(Model => Model.SelectModelId, Model.BicycleModels, "--- Select Model ---", new { @class = "form-control" })
-    @Html.DropDownListFor(Model => Model.SelectedVersionId, Model.BicycleVersions, "--- Select Version ---", new { @class = "form-control" })
-</div>
-
+<table class="table">
+        <tr>
+            <td>
+                @Html.DropDownListFor(Model => Model.SelectedMakeId, Model.BicycleMakes, "--- Select Make ---", new { @class = "form-control" })
+            </td>
+            <td>
+                @Html.DropDownListFor(Model => Model.SelectModelId, Model.BicycleModels, "--- Select Model ---", new { @class = "form-control" })
+            </td>
+            <td>
+                @Html.DropDownListFor(Model => Model.SelectedVersionId, Model.BicycleVersions, "--- Select Version ---", new { @class = "form-control" })
+            </td>
+        </tr>
+</table>
+   
 @section Scripts{
     <script>
         $(document).ready(function() {
