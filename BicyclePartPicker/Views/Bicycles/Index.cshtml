@@ -1,77 +1,94 @@
-﻿@*@model IEnumerable<BicyclePartPicker.Models.Bicycle>*@
-@model SelectedListViewModel
+﻿@model SelectedListViewModel
 
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Select Bicycle</h1>
 
 <table class="table">
         <tr>
-            <td>
-                @Html.DropDownListFor(Model => Model.SelectedMakeId, Model.BicycleMakes, "--- Select Make ---", new { @class = "form-control" })
-            </td>
-            <td>
-                @Html.DropDownListFor(Model => Model.SelectModelId, Model.BicycleModels, "--- Select Model ---", new { @class = "form-control" })
-            </td>
-            <td>
-                @Html.DropDownListFor(Model => Model.SelectedVersionId, Model.BicycleVersions, "--- Select Version ---", new { @class = "form-control" })
-            </td>
+            <form asp-controller="Bicycles" asp-action="Index" method="get">
+                <td>
+                    @Html.DropDownListFor(Model => Model.SelectedMakeId, Model.BicycleMakes, "--- Select Make ---", new { @class = "form-control" })
+                </td>
+                <td>
+                    @Html.DropDownListFor(Model => Model.SelectModelId, Model.BicycleModels, "--- Select Model ---", new { @class = "form-control" })
+                </td>
+                <td>
+                    @Html.DropDownListFor(Model => Model.SelectedVersionId, Model.BicycleVersions, "--- Select Version ---", new { @class = "form-control" })
+                </td>
+                <td>
+                    <input id="submitButton" type="submit" value="Search" disabled="disabled" />
+                </td>
+            </form>
         </tr>
 </table>
    
 @section Scripts{
     <script>
-        $(document).ready(function() {
-            console.log("Hello");
+        $(document).ready(function () {
+            $("#SelectedMakeId").val() = "--- Select Make ---";
             getModelByMakeId();
             getVersionByModelId();
-        })
+        });
         $("#SelectModelId").change(function () {
             getVersionByModelId();
         });
         $("#SelectedMakeId").change(function () {
             getModelByMakeId();
         });
+        $("#SelectedVersionId").change(function () {
+            setSubmitButtonDisabled();
+        });
         var getVersionByModelId = function () {
-            console.log("test");
             $.ajax({
                 url: '@Url.Action("GetVersionByModelId", "Bicycles")',
-                type: 'POST',
+                type: 'GET',
                 data: {
                     modelId: $('#SelectModelId').val(),
                 },
                 success: function (data) {
                     $('#SelectedVersionId').find('option').remove()
-                    $('#SelectedVersionId').append('<option value="0">--- Select Version ---</option>')
+                    $('#SelectedVersionId').append('<option>--- Select Version ---</option>')
                     $(data).each(
                         function (index, item) {
                             $('#SelectedVersionId').append('<option value="' + item.version + '">' + item.version + '</option>')
                         }
                     )
+                    setSubmitButtonDisabled()
                 }
-            })
+            });
         }
         var getModelByMakeId = function() {
             $.ajax({
                 url: '@Url.Action("GetModelByMakeId", "Bicycles")',
-                type: 'POST',
+                type: 'GET',
                 data: {
                     makeId: $('#SelectedMakeId').val(),
                 },
                 success: function (data) {
                     $('#SelectedVersionId').find('option').remove()
-                    $('#SelectedVersionId').append('<option value="0">--- Select Version ---</option>')
+                    $('#SelectedVersionId').append('<option>--- Select Version ---</option>')
                     $('#SelectModelId').find('option').remove()
-                    $('#SelectModelId').append('<option value="0">--- Select Model ---</option>')
+                    $('#SelectModelId').append('<option>--- Select Model ---</option>')
                     $(data).each(
                         function (index, item) {
-                            $('#SelectModelId').append('<option value="'+item.model+'">'+item.model+'</option>')
+                            $('#SelectModelId').append('<option value="' + item.model + '">' + item.model + '</option>')
                         }
                     )
+                    setSubmitButtonDisabled()
                 }
-            })
+            });
+        }
+
+        var setSubmitButtonDisabled = function () {
+            console.log($("#SelectedVersionId").val());
+            if ($("#SelectedVersionId").val() != "--- Select Version ---") {
+                $("#submitButton").prop('disabled', false)
+            } else {
+                $("#submitButton").prop('disabled', true)
+            }
         }
     </script>
 }
