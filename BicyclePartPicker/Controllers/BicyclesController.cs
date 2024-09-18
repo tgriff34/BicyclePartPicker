@@ -17,10 +17,13 @@ namespace BicyclePartPicker.Controllers
         }
 
         // GET: Bicycles
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string selectedMakeId, string selectModelId, string selectedVersionId)
         {
             var list = await _context.Bicycle.ToArrayAsync();
-
+            if (!string.IsNullOrEmpty(selectedMakeId))
+            {
+                System.Diagnostics.Debug.WriteLine($"Bicycle Make: {selectedMakeId} \n BicycleModel: {selectModelId} \n Bicycle Version: {selectedVersionId}");
+            }
 
             /* var make = list[i].Make;
              var model = list[i].Model;
@@ -38,6 +41,12 @@ namespace BicyclePartPicker.Controllers
             }
             return View(selectedListViewModel);
         }
+
+       /* [HttpGet]
+        public async Task<IActionResult> Index(string bicycleMake, string bicycleModel, string bicycleVersion)
+        {
+            return View();
+        }*/
 
         public JsonResult GetVersionByModelId(string modelId)
         {

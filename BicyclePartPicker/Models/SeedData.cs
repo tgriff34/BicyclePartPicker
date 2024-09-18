@@ -51,43 +51,57 @@ namespace BicyclePartPicker.Models
                     {
                         Make = "Specialized",
                         Model = "Tarmac",
-                        Version = "SL7"
+                        Version = "SL7",
+                        BottomBracket =
+                            context.BottomBracket.Where(bb => bb.bBType == "Threaded" && (bb.Name == "SRAM" || bb.Name == "Shimano")).ToList(),
                     },
                     new Bicycle
                     {
                         Make = "Specialized",
                         Model = "Tarmac",
-                        Version = "SL8"
+                        Version = "SL8",
+                        BottomBracket =
+                            context.BottomBracket.Where(bb => bb.bBType == "Threaded" && (bb.Name == "SRAM" || bb.Name == "Shimano")).ToList(),
                     },
                     new Bicycle
                     {
                         Make = "Trek",
                         Model = "Madone",
-                        Version = "Gen 8"
+                        Version = "Gen 8",
+                        BottomBracket =
+                            context.BottomBracket.Where(bb => bb.bBType == "Threaded" && (bb.Name == "SRAM" || bb.Name == "Shimano")).ToList(),
                     },
                     new Bicycle
                     {
                         Make = "Trek",
                         Model = "Émonda",
-                        Version = "SLR 9"
+                        Version = "SLR 9",
+                        BottomBracket =
+                            context.BottomBracket.Where(bb => bb.bBType == "Threaded" && (bb.Name == "SRAM" || bb.Name == "Shimano")).ToList(),
                     },
                     new Bicycle
                     {
                         Make = "Canyon",
                         Model = "Aeroad",
-                        Version = "CF SLX 7"
+                        Version = "CF SLX 7",
+                        BottomBracket =
+                            context.BottomBracket.Where(bb => bb.bBType == "Threaded" && (bb.Name == "SRAM" || bb.Name == "Shimano")).ToList(),
                     },
                     new Bicycle
                     {
                         Make = "Canyon",
                         Model = "Endurance",
-                        Version = "CF SLX 8"
+                        Version = "CF SLX 8",
+                        BottomBracket =
+                            context.BottomBracket.Where(bb => bb.bBType == "Threaded" && (bb.Name == "SRAM" || bb.Name == "Shimano")).ToList(),
                     },
                     new Bicycle
                     {
                         Make = "Canyon",
                         Model = "Aeroad",
-                        Version = "CF SLX 8"
+                        Version = "CF SLX 8",
+                        BottomBracket =
+                            context.BottomBracket.Where(bb => bb.bBType == "Threaded" && (bb.Name == "SRAM" || bb.Name == "Shimano")).ToList(),
                     }
                 );
                 context.SaveChanges();
