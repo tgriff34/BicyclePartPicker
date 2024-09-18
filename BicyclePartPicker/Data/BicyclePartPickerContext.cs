@@ -15,5 +15,6 @@ namespace BicyclePartPicker.Data
         }
 
         public DbSet<BicyclePartPicker.Models.Bicycle> Bicycle { get; set; } = default!;
+        public DbSet<BicyclePartPicker.Models.BottomBracket> BottomBracket { get; set; } = default!;
     }
 }

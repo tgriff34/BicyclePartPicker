@@ -9,13 +9,43 @@ namespace BicyclePartPicker.Models
         {
             using (var context = new BicyclePartPickerContext(serviceProvider.GetRequiredService<DbContextOptions<BicyclePartPickerContext>>()))
             {
-                if (context.Bicycle.Any())
+                if (context.Bicycle.Any() || context.BottomBracket.Any())
                 {
+                    foreach (var entity in context.BottomBracket)
+                    {
+                        context.BottomBracket.Remove(entity);
+                    }
                     foreach (var entity in context.Bicycle)
                     {
                         context.Bicycle.Remove(entity);
                     }
                 }
+                context.BottomBracket.AddRange(
+                    new BottomBracket
+                    {
+                        Brand = "SRAM",
+                        Name = "BSA & Italian Threaded DUB",
+                        bBType = "Threaded"
+                    },
+                    new BottomBracket
+                    {
+                        Brand = "SRAM",
+                        Name = "T47 DUB",
+                        bBType = "Threaded"
+                    },
+                    new BottomBracket
+                    {
+                        Brand = "Shimano",
+                        Name = "Dura-Ace & XTR Outboard",
+                        bBType = "Threaded"
+                    },
+                    new BottomBracket
+                    {
+                        Brand = "Shimano",
+                        Name = "Ultegra BBR60 & Deore XT MT800 Outboard",
+                        bBType = "Threaded"
+                    }
+                );
                 context.Bicycle.AddRange(
                     new Bicycle
                     {
