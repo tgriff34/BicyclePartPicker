@@ -11,6 +11,7 @@ namespace BicyclePartPicker.Models
         public List<SelectListItem> BicycleMakes { get; set; }
         public List<SelectListItem> BicycleModels { get; set; }
         public List<SelectListItem> BicycleVersions { get; set; }
+        public List<BottomBracket> BottomBrackets { get; set; }
 
     }
 }
