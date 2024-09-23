@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BicyclePartPicker.Migrations
 {
     [DbContext(typeof(BicyclePartPickerContext))]
-    [Migration("20240918161409_BottomBracket")]
-    partial class BottomBracket
+    [Migration("20240921021426_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -49,6 +49,21 @@ namespace BicyclePartPicker.Migrations
                     b.ToTable("Bicycle");
                 });
 
+            modelBuilder.Entity("BicyclePartPicker.Models.BicycleBottomBracket", b =>
+                {
+                    b.Property<int>("BicycleId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("BottomBracketId")
+                        .HasColumnType("int");
+
+                    b.HasKey("BicycleId", "BottomBracketId");
+
+                    b.HasIndex("BottomBracketId");
+
+                    b.ToTable("BicycleBottomBracket");
+                });
+
             modelBuilder.Entity("BicyclePartPicker.Models.BottomBracket", b =>
                 {
                     b.Property<int>("Id")
@@ -72,6 +87,35 @@ namespace BicyclePartPicker.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("BottomBracket");
+                });
+
+            modelBuilder.Entity("BicyclePartPicker.Models.BicycleBottomBracket", b =>
+                {
+                    b.HasOne("BicyclePartPicker.Models.Bicycle", "Bicycle")
+                        .WithMany("BicycleBottomBrackets")
+                        .HasForeignKey("BicycleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("BicyclePartPicker.Models.BottomBracket", "BottomBracket")
+                        .WithMany("BicycleBottomBrackets")
+                        .HasForeignKey("BottomBracketId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Bicycle");
+
+                    b.Navigation("BottomBracket");
+                });
+
+            modelBuilder.Entity("BicyclePartPicker.Models.Bicycle", b =>
+                {
+                    b.Navigation("BicycleBottomBrackets");
+                });
+
+            modelBuilder.Entity("BicyclePartPicker.Models.BottomBracket", b =>
+                {
+                    b.Navigation("BicycleBottomBrackets");
                 });
 #pragma warning restore 612, 618
         }

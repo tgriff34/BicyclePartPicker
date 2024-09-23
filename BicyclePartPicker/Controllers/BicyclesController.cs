@@ -20,18 +20,18 @@ namespace BicyclePartPicker.Controllers
         public async Task<IActionResult> Index(string selectedMakeId, string selectModelId, string selectedVersionId)
         {
             var list = await _context.Bicycle.ToArrayAsync();
-            if (!string.IsNullOrEmpty(selectedMakeId))
-            {
-                System.Diagnostics.Debug.WriteLine($"Bicycle Make: {selectedMakeId} \n BicycleModel: {selectModelId} \n Bicycle Version: {selectedVersionId}");
-            }
-
-            /* var make = list[i].Make;
-             var model = list[i].Model;
-             var version = list[i].Version;*/
             selectedListViewModel.BicycleMakes = new List<SelectListItem>();
             selectedListViewModel.BicycleModels = new List<SelectListItem>();
             selectedListViewModel.BicycleVersions = new List<SelectListItem>();
-
+            selectedListViewModel.BottomBrackets = new List<BottomBracket>();
+            
+            System.Diagnostics.Debug.WriteLine($"Bicycle Model: {selectModelId} Make{selectedMakeId} version{selectedVersionId}");
+            if (!string.IsNullOrEmpty(selectModelId) && !string.IsNullOrEmpty(selectedVersionId) && !string.IsNullOrEmpty(selectedMakeId))
+            {
+                var result = await _context.BottomBracket.Include(x => x.Bicycles.Where(y => y.Make == selectedMakeId)).ToListAsync();
+                selectedListViewModel.BottomBrackets = result;
+            }
+            
             for (int i = 0; i < list.Count(); i++)
             {
                 if (selectedListViewModel.BicycleMakes.Find(l1 => l1.Text == list[i].Make) == null)

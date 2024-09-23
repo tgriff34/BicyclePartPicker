@@ -5,14 +5,14 @@
 namespace BicyclePartPicker.Migrations
 {
     /// <inheritdoc />
-    public partial class Version : Migration
+    public partial class AddImage : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<string>(
-                name: "Version",
-                table: "Bicycle",
+                name: "Image",
+                table: "BottomBracket",
                 type: "nvarchar(max)",
                 nullable: false,
                 defaultValue: "");
@@ -22,8 +22,8 @@ namespace BicyclePartPicker.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "Version",
-                table: "Bicycle");
+                name: "Image",
+                table: "BottomBracket");
         }
     }
 }

@@ -16,5 +16,10 @@ namespace BicyclePartPicker.Data
 
         public DbSet<BicyclePartPicker.Models.Bicycle> Bicycle { get; set; } = default!;
         public DbSet<BicyclePartPicker.Models.BottomBracket> BottomBracket { get; set; } = default!;
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Bicycle>().HasMany(x => x.BottomBrackets).WithMany(y => y.Bicycles).UsingEntity<BicycleBottomBracket>();
+        }
     }
 }
