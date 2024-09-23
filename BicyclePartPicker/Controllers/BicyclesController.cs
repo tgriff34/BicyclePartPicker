@@ -31,7 +31,7 @@ namespace BicyclePartPicker.Controllers
                 var result = await _context.BottomBracket.Include(x => x.Bicycles.Where(y => y.Make == selectedMakeId)).ToListAsync();
                 selectedListViewModel.BottomBrackets = result;
             }
-
+            
             for (int i = 0; i < list.Count(); i++)
             {
                 if (selectedListViewModel.BicycleMakes.Find(l1 => l1.Text == list[i].Make) == null)

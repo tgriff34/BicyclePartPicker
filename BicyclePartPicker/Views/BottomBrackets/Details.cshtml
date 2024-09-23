@@ -4,11 +4,11 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<h1>@Html.DisplayFor(model => model.Name)</h1>
 
 <div>
-    <h4>BottomBracket</h4>
-    <hr />
+    @* <h4>Bottom Bracket</h4> *@
+    <hr/>
     <dl class="row">
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Brand)
@@ -17,7 +17,7 @@
             @Html.DisplayFor(model => model.Brand)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.bBType)
+            @Html.DisplayName("Type")
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.bBType)
@@ -25,6 +25,8 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a href="javascript:void(0);" onclick="history.go(-1);">Back to List</a>
+</div>
+<div>
+    <img class="align-content-center" src="@Url.Content(Model?.Image)" width="300" height="300">
 </div>

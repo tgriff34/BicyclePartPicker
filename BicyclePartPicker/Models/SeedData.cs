@@ -23,40 +23,28 @@ namespace BicyclePartPicker.Models
                     }
                 }
 
-                List<BottomBracket> bottomBrackets;
-                /*if (!context.BottomBracket.Any())
-                {*/
-                    bottomBrackets = new List<BottomBracket>
-                    {
-                        new BottomBracket { Brand = "SRAM", Name = "BSA & Italian Threaded DUB", bBType = "Threaded" },
-                        new BottomBracket { Brand = "SRAM", Name = "T47 DUB", bBType = "Threaded" },
-                        new BottomBracket { Brand = "Shimano", Name = "Dura-Ace & XTR Outboard", bBType = "Threaded" },
-                        new BottomBracket { Brand = "Shimano", Name = "Ultegra BBR60 & Deore XT MT800 Outboard", bBType = "Threaded" }
-                    };
-                /*}
-                else
-                {
-                    bottomBrackets = context.BottomBracket.ToList();
-                }*/
+                //string imagePath = $"{Directory.GetCurrentDirectory()}{@"\wwwroot\images\bottombrackets"}";
 
-                List<Bicycle> bicycles = new List<Bicycle>();
-               /* if (!context.Bicycle.Any())
-                {*/
-                    var bottomBrackets1 = bottomBrackets.Where(bb => bb.bBType.Contains("Threaded")).ToList();
-                    bicycles = new List<Bicycle> {
-                        new Bicycle { Make = "Specialized",Model = "Tarmac", Version = "SL7", BottomBrackets = bottomBrackets.Where(bb => bb.bBType.Contains("Threaded")).ToList() },
-                        new Bicycle { Make = "Specialized", Model = "Tarmac", Version = "SL8", BottomBrackets = bottomBrackets.Where(bb => bb.bBType.Contains("Threaded")).ToList() },
-                        new Bicycle { Make = "Trek", Model = "Madone", Version = "Gen 8", BottomBrackets = bottomBrackets.Where(bb => bb.bBType.Contains("Threaded")).ToList() },
-                        new Bicycle { Make = "Trek", Model = "Émonda", Version = "SLR 9", BottomBrackets = bottomBrackets.Where(bb => bb.bBType.Contains("Threaded")).ToList() },
-                        new Bicycle { Make = "Canyon", Model = "Aeroad", Version = "CF SLX 7", BottomBrackets = bottomBrackets.Where(bb => bb.bBType.Contains("Threaded")).ToList() },
-                        new Bicycle { Make = "Canyon", Model = "Endurance", Version = "CF SLX 8", BottomBrackets = bottomBrackets.Where(bb => bb.bBType.Contains("Threaded")).ToList() },
-                        new Bicycle { Make = "Canyon", Model = "Aeroad", Version = "CF SLX 8", BottomBrackets = bottomBrackets.Where(bb => bb.bBType.Contains("Threaded")).ToList() }
-                    };
-               /* }
-                else
+                List<BottomBracket> bottomBrackets = new List<BottomBracket>
                 {
-                    bicycles = context.Bicycle.ToList();
-                }*/
+                    new BottomBracket { Brand = "SRAM", Name = "BSA & Italian Threaded DUB", bBType = "Threaded", Image="~/images/bottombrackets/srambsadub.jpg" },
+                    new BottomBracket { Brand = "SRAM", Name = "T47 DUB", bBType = "Threaded", Image="~/images/bottombrackets/sramt47dub.jpg" },
+                    new BottomBracket { Brand = "Shimano", Name = "Dura-Ace & XTR Outboard", bBType = "Threaded", Image="~/images/bottombrackets/shimanoduraace.jpeg" },
+                    new BottomBracket { Brand = "Shimano", Name = "Ultegra BBR60 & Deore XT MT800 Outboard", bBType = "Threaded", Image="~/images/bottombrackets/shimanobbr60.jpeg" }
+                };
+                
+
+                List<Bicycle> bicycles = new List<Bicycle> 
+                {
+                    new Bicycle { Make = "Specialized",Model = "Tarmac", Version = "SL7", BottomBrackets = bottomBrackets.Where(bb => bb.bBType.Contains("Threaded")).ToList() },
+                    new Bicycle { Make = "Specialized", Model = "Tarmac", Version = "SL8", BottomBrackets = bottomBrackets.Where(bb => bb.bBType.Contains("Threaded")).ToList() },
+                    new Bicycle { Make = "Trek", Model = "Madone", Version = "Gen 8", BottomBrackets = bottomBrackets.Where(bb => bb.bBType.Contains("Threaded")).ToList() },
+                    new Bicycle { Make = "Trek", Model = "Émonda", Version = "SLR 9", BottomBrackets = bottomBrackets.Where(bb => bb.bBType.Contains("Threaded")).ToList() },
+                    new Bicycle { Make = "Canyon", Model = "Aeroad", Version = "CF SLX 7", BottomBrackets = bottomBrackets.Where(bb => bb.bBType.Contains("Threaded")).ToList() },
+                    new Bicycle { Make = "Canyon", Model = "Endurance", Version = "CF SLX 8", BottomBrackets = bottomBrackets.Where(bb => bb.bBType.Contains("Threaded")).ToList() },
+                    new Bicycle { Make = "Canyon", Model = "Aeroad", Version = "CF SLX 8", BottomBrackets = bottomBrackets.Where(bb => bb.bBType.Contains("Threaded")).ToList() }
+                };
+               
 
                 for (int i = 0; i < bottomBrackets.Count; i++)
                 {
